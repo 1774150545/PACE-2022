@@ -132,26 +132,23 @@ public:
     double GlobalStartTime;
 
     // 判断是否连接
-    std::vector<std::unordered_map<int, int> > connect;
+    std::vector <std::unordered_map<int, int>> connect;
 
     vector<Node *> nodeVec;
 
     std::vector<Node *> nodeVecTemp;
 
     // ------------------------------------------ 时间和检查最优相关 -------------------------------------------
-    // 是否开启每轮都检查最优
     int CheckInterval = 100000;
     double CostTimeCheckInterVal = 15;
     int MinBestConfCountChange = 2;
-    bool checkBetterPerIter = false;
+    bool checkBetterPerIter = false; // 是否开启每轮都检查最优
     int EnableCheckTime = 500;
-
     int addTTimes = 0;
 
     // ----------------------------------------Jump out of local optimum---------------------------------------
     double delPercent = 0.1;
     double increaseT = 0.1;
-
     bool enableJumpOut = false;
 
     myList cList;
@@ -163,7 +160,6 @@ public:
     int *unNumberedPos;
     int unNumberedCount;
 
-
     vector<int> fvSolution;
 
     void getFVSolution();
@@ -171,13 +167,12 @@ public:
     int *conflictNodes;
     int conflictCount;
 
-    pair<lType, lType> getLabelRange(int nodeId);
+    pair <lType, lType> getLabelRange(int nodeId);
     // --------------------------------------------------------------------------------------------------------------
 
     oneMoveRes findOneMove(int chosen, int moveType = -1);
 
     void doMove(int chosen, int moveType, int insertBaseNode);
-
 
     int
     FVSLocalSearch(double T0 = 0.6, double alpha = 0.99, int maxMvt = 10000, int maxFail = 50, bool runOnce = false);
@@ -213,9 +208,9 @@ public:
     // 6. pie
     bool pie();
 
-    vector<Edge> acyclicEdges();
+    vector <Edge> acyclicEdges();
 
-    vector<Edge> piEdges();
+    vector <Edge> piEdges();
 
     vector<int> vertexToStronglyConnectedComponentNumberNR();
 
@@ -270,7 +265,7 @@ public:
     unordered_map<int, int> reducedToOriginMap;
 
 
-    // ------------------------------------- 初始解的部分，已删除 --------------------------------------
+    // ------------------------------------- 初始解 --------------------------------------
     int initSolutionSelect = 40000; // 应该是连通分量的个数
     //double singleRatio = 0.85;
     double singleRatio = 0.6;
@@ -296,8 +291,8 @@ public:
     // ---------------------------------------------- cache ---------------------------------------------------
     bool getFromCache;
     bool startCache; // 开启cache策略
-    int CacheCheckTime = 300; // 检测是否开启cache的时间  这个时间还能再小点
-    int AddTTimesLimit = 70; // 升温次数的限制，高于这个次数就不会开启cache  70次
+    int CacheCheckTime = 300; // 检测是否开启cache的时间
+    int AddTTimesLimit = 70; // 升温次数的限制，高于这个次数就不会开启cache
     bool forbidCache; // 是否检测开启缓存
     void runFVSP(int randSeed);
 

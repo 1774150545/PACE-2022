@@ -605,7 +605,7 @@ bool Topo::dome() {
         for (int toId: nodeVec[i]->to) {
 
             Edge edge = {i, toId};
-            if (isDominate(edge)) { // 是支配边，则删除它
+            if (isDominate(edge)) { // 是支配边，则删除
                 toReduce.push_back(edge);
                 hasReduce = true;
                 reducedEdgeCount++;
