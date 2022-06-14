@@ -1,4 +1,5 @@
 # PACE-2022
+[![DOI](https://sandbox.zenodo.org/badge/DOI/10.5072/zenodo.1073632.svg)](https://doi.org/10.5072/zenodo.1073632)
 PACE22_FVSP_HUST_SCP
 
 ## Algorithm Description
