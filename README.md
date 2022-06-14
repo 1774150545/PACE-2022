@@ -3,7 +3,7 @@ PACE22_FVSP_HUST_SCP
 
 ## Algorithm Description
 - pace 2022 slover "FVSP_HUST_SCP"
-- [Algorithm Description.pdf]([https://github.com/](https://github.com/1774150545/PACE-2022/blob/main/doc/Algorithm%20Description.pdf))
+- **[Algorithm Description.pdf](https://github.com/1774150545/PACE-2022/blob/main/doc/Algorithm%20Description.pdf)**
 
 ## Enviroment
 Ubuntu20.04
