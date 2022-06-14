@@ -12,7 +12,7 @@ Ubuntu20.04
 ```shell
 mkdir build &&
 cd build &&
-cmake ..  &&
+cmake .. &&
 make 
 ```
 
