@@ -23,8 +23,11 @@ make
 
 ## Note
 we will reformat and beautify the code soon...
+libBC.a is based on [4]
+libNuMVC.a is based on [2]
 
 ## Reference
-- Philippe Galinier, Eunice Lemamou, and Mohamed Wassim Bouzidi. Applying local search to the feedback vertex set problem. Journal of Heuristics, 19(5):797–818, oct 2013. doi: 10.1007/s10732-013-9224-z.
-- Cai S, Su K, Luo C, et al. NuMVC: An efficient local search algorithm for minimum vertex cover[J]. Journal of Artificial Intelligence Research, 2013, 46: 687-716.
-- Lin H M, Jou J Y. On computing the minimum feedback vertex set of a directed graph by contraction operations[J]. IEEE Transactions on computer-aided design of integrated circuits and systems, 2000, 19(3): 295-307.
+- [1]Philippe Galinier, Eunice Lemamou, and Mohamed Wassim Bouzidi. Applying local search to the feedback vertex set problem. Journal of Heuristics, 19(5):797–818, oct 2013. doi: 10.1007/s10732-013-9224-z.
+- [2]Cai S, Su K, Luo C, et al. NuMVC: An efficient local search algorithm for minimum vertex cover[J]. Journal of Artificial Intelligence Research, 2013, 46: 687-716.
+- [3]Lin H M, Jou J Y. On computing the minimum feedback vertex set of a directed graph by contraction operations[J]. IEEE Transactions on computer-aided design of integrated circuits and systems, 2000, 19(3): 295-307.
+- [4]Su Z, Zhang Q, Lü Z, et al. Weighting-based variable neighborhood search for optimal camera placement[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2021, 35(14): 12400-12408.
