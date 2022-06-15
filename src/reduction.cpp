@@ -1,6 +1,4 @@
-//
 #include "Topo.h"
-#include "LMCMaxClique.h"
 
 bool Topo::doGraphReduction2() {
     bool TryAllRelabel = true;
@@ -187,28 +185,6 @@ bool Topo::doGraphReduction2() {
     return false;
 }
 
-/*
-* Strongly connected operate
-*/
-void Topo::maxCliqueReduce() {
-    ID ComponentNumber = 0;
-    Vec<ID> ComponentSubID(N, 0);
-    Vec<Vec<ID>> Component;
-    vertexToStronglyConnectedComponentNumberNR();
-    Component.resize(currentCpmponent);
-    for (int i = 0; i < N; i++) {
-        if (isReduced[i]) continue;
-        int componentId = sccsByNum[i];
-        Component[componentId].push_back(i);
-    }
-    int deleteNum = 0;
-    int num = 0;
-    for (auto i: Component) {
-        viaClique(i);
-        ++num;
-    }
-}
-
 
 bool Topo::allIIEdgeJudge(Vec<ID> &ComponentSub) {
     for (auto src = ComponentSub.begin(); src != ComponentSub.end(); ++src) {
@@ -225,56 +201,6 @@ bool Topo::allIIEdgeJudge(Vec<ID> &ComponentSub) {
     return true;
 }
 
-void Topo::viaClique(Vec<ID> &ComponentSub) {
-    Vec<ID> subGraph;
-    HashMap<ID, ID> subGraph_map;
-    ID newNodeNum = ComponentSub.size();
-    ID newEdgeNum = 0;
-    if (!allIIEdgeJudge(ComponentSub))return;
-    Vec<LMCMaxClique::NewEdge> newEdges;
-    Vec<bool> Solver(ComponentSub.size() + 1, 0);
-    if (newNodeNum > viaCliqueMaxNodeNum)return;
-    for (auto j = ComponentSub.begin(); j != ComponentSub.end(); ++j) {
-        subGraph.push_back(*j);
-        subGraph_map[*j] = subGraph.size() - 1;
-    }
-    Vec<Vec<bool>> sign(ComponentSub.size(), Vec<bool>(ComponentSub.size(), 0));
-    for (auto j = 0; j != ComponentSub.size(); ++j) {
-        if (isReduced[subGraph[j]]) { continue; }
-        Vec<ID> visited(ComponentSub.size(), 0);
-        Node *theNode = nodeVec[subGraph[j]];
-        for (auto dst = theNode->to.begin(); dst != theNode->to.end(); ++dst) {
-            if (isReduced[*dst])continue;
-            visited[subGraph_map[*dst]] = 1;
-        }
-        for (auto dst = 0; dst != ComponentSub.size(); ++dst) {
-            if (isReduced[subGraph[dst]])continue;
-            if (j >= dst)continue;
-            if (visited[dst] == 1)continue;
-            newEdges.push_back({j + 1, dst + 1});
-            newEdgeNum++;
-        }
-    }
-    LMCMaxClique m;
-    Vec<int> mvc_solution;
-    bool flag = false;
-    int tt = 0;
-    flag = m.maxCliqueSolver(newEdges, newNodeNum, Solver, process_max_time);
-    if (flag == 1) {
-        for (auto j = 1; j != ComponentSub.size() + 1; ++j) {
-            if ((Solver[j]) == 1) {
-                ID t = j - 1;
-                isReduced[subGraph[t]] = true;
-
-            } else {
-                ID t = j - 1;
-                isReduced[subGraph[t]] = true;
-                mustInFVS[subGraph[t]] = true;
-                ++tt;
-            }
-        }
-    }
-}
 
 void Topo::reduction() {
     int oldN = N;
@@ -605,7 +531,7 @@ bool Topo::dome() {
         for (int toId: nodeVec[i]->to) {
 
             Edge edge = {i, toId};
-            if (isDominate(edge)) { // 是支配边，则删除
+            if (isDominate(edge)) { // 是支配边，则删除它
                 toReduce.push_back(edge);
                 hasReduce = true;
                 reducedEdgeCount++;

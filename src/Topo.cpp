@@ -1,9 +1,12 @@
 #include <fstream>
 #include <algorithm>
+
+#pragma warning(disable:4996 )
+
 #include <iostream>
 #include "Topo.h"
-#include "FastVC.h"
-#include "NuMVC.h"
+#include "minVerVC.h"
+#include "maxVerVC.h"
 #include "BaseCircle.h"
 
 using namespace std;
@@ -449,6 +452,7 @@ void Topo::doMove(int chosen, int moveType, int insertBaseNode) {
         } else {
             cList.insertBefore(cList.rootNode, linkNodes[chosen]);
         }
+
     } else if (moveType == 4) {
         cList.insertFirst(linkNodes[chosen]);
     }
@@ -646,7 +650,7 @@ void handle(int sigNum) {
 }
 
 
-/********************************minimum vertex cover ********************************************/
+/******************************** minimum vertex cover ********************************************/
 void Topo::InitSolution() {
     Vec<ID> MVCSolution;
     Vec<ID> subComponet;
@@ -685,7 +689,7 @@ void Topo::InitSolution() {
         for (int nodeId: MVCSolution) {
             pushUnNumbered(nodeId);
         }
-        //拓扑序列更新      
+        //拓扑序列更新
         cList.setInitSol(newTopoNodes);
 
         // 更新best
@@ -786,13 +790,13 @@ bool Topo::MVCInitSolution(Vec<ID> &subComponet, Vec<ID> &MVCSolution) {
         }
     }
     if (InitRunTime < 0) {
-        InitRunTime = 10000;
+        InitRunTime = 10000;//做个修复
     }
 
     bool flag1, flag2;
     if (subComponet.size() < initSolutionSelect) {
 
-        Vec<NuMVC::Edge> MVCEdge;
+        Vec<minVerVC::Edge> MVCEdge;
         for (auto src = 0; src != subComponet.size(); ++src) {
             Node *Neighbour = nodeVec[subGraph[src]];
             for (auto dst = Neighbour->to.begin(); dst != Neighbour->to.end(); ++dst) {
@@ -800,10 +804,10 @@ bool Topo::MVCInitSolution(Vec<ID> &subComponet, Vec<ID> &MVCSolution) {
                 MVCEdge.push_back({src, subGraph_map[*dst]});
             }
         }
-        NuMVC m(0, std::chrono::milliseconds(InitRunTime));
+        minVerVC m(0, std::chrono::milliseconds(InitRunTime));
         flag2 = m.NuMVC_minVertexCovSolver(MVCEdge, subComponet.size(), mvc_solution);
     } else {
-        Vec<FastVC::Edge> MVCEdge;
+        Vec<maxVerVC::Edge> MVCEdge;
         for (auto src = 0; src != subComponet.size(); ++src) {
             Node *Neighbour = nodeVec[subGraph[src]];
             for (auto dst = Neighbour->to.begin(); dst != Neighbour->to.end(); ++dst) {
@@ -811,7 +815,7 @@ bool Topo::MVCInitSolution(Vec<ID> &subComponet, Vec<ID> &MVCSolution) {
                 MVCEdge.push_back({src, subGraph_map[*dst]});
             }
         }
-        FastVC f(0, std::chrono::milliseconds(InitRunTime));//30s
+        maxVerVC f(0, std::chrono::milliseconds(InitRunTime));//30s
         flag2 = f.FastVC_minVertexCovSolver(MVCEdge, subComponet.size(), mvc_solution);
     }
     if (!flag2)return false;
