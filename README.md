@@ -1,6 +1,6 @@
 # PACE-2022
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6644066.svg)](https://doi.org/10.5281/zenodo.6644066)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6644409.svg)](https://doi.org/10.5281/zenodo.6644409)
 
 PACE22_FVSP_HUST_SCP
 
