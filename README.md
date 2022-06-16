@@ -26,7 +26,7 @@ make
 
 ## Note
 - we will reformat and beautify the code soon...
-- libBC.a is based on [4] and libNuMVC.a is based on [2]
+- libBC.a is based on [4] and libNuMVC.a is based on [2] These two are not done by us, so they are packaged, but you can find the source code from other open source projects.
 
 ## Reference
 - [1] Philippe Galinier, Eunice Lemamou, and Mohamed Wassim Bouzidi. Applying local search to the feedback vertex set problem. Journal of Heuristics, 19(5):797–818, oct 2013. doi: 10.1007/s10732-013-9224-z.
